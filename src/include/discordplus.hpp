@@ -1,12 +1,14 @@
-#include <string>
 #pragma once
+#include <string>
+#include <functional>
+#include "eventEmitter.hpp"
+
 
 namespace DiscordPlus
 {
-    class Client
+    class Client : public EventEmitter
     {
         public:
-            static void connect(int version, std::string encoding); // Connect to gateway
-            void login(std::string* token);                  // Gateway identify
+            void login(std::string token);// Gateway identify
     };
 };
