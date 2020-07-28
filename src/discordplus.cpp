@@ -10,7 +10,7 @@ using namespace web::websockets::client;
 
 namespace DiscordPlus
 {
-    void Client::login(std::string token)
+    void Client::login(const std::string token)
     {
         int heartbeats;
 

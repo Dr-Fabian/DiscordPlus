@@ -14,10 +14,10 @@ int main()
     DiscordPlus::Client client;
 
     client.on("message", [&](){
-        //Message handler
+        std::cout << "message created // message handler" << std::endl;
     });
-
-    client.login("");
+    
+    client.login("NjU5NTA0NTU1MDA4MTk2NjE5.XxShCg.Apa3jna5ceiAJD5rWzVucIS4iyI");
 
     return 1;
 }
