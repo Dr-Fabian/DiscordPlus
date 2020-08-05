@@ -3,14 +3,17 @@
 #include <cpprest/ws_client.h>
 #include <cpprest/json.h>
 #include <future>
-#include "include/string_to_json.hpp"
+#include "include/utility.hpp"
 #include "include/discordplus.hpp"
+#include "include/message.hpp"
+#include <cpprest/details/web_utilities.h>
 
 using namespace web::websockets::client;
+using namespace DiscordPlus::Utility;
 
 namespace DiscordPlus
 {
-    void Client::login(const std::string token)
+    void Client::login(std::string token)
     {
         int heartbeats;
 
@@ -78,7 +81,9 @@ namespace DiscordPlus
                                 return;
                             } else if(data["t"].serialize() == "\"MESSAGE_CREATE\"")
                             {
-                                this->emit("message");
+                                Message discordMessage(StringT_To_String(data["d"]["content"].serialize()), StringT_To_String(data["d"]["id"].serialize()), StringT_To_String(data["d"]["timestamp"].serialize()), StringT_To_String(data["d"]["channel_id"].serialize()));
+                                std::cout << discordMessage.id << std::endl;
+                                this->emit("message", &discordMessage);
                             }
                         })
                         .wait();
