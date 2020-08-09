@@ -16,11 +16,17 @@ int main()
 
     client.on("message", [&](void* pointer){
         std::cout << "message created // message handler" << std::endl;
-        DiscordPlus::Message* message_pointer = (DiscordPlus::Message*) pointer;
-        std::cout << message_pointer->content << std::endl;
+        DiscordPlus::Message message = *(DiscordPlus:: Message*) pointer;
+        std::cout << message.content << std::endl;
+    });
+
+    client.on("message_delete", [&](void* pointer){
+        std::cout << "message deleted // delete handler" <<  std::endl;
+        DiscordPlus::Message message = *(DiscordPlus:: Message*) pointer;
+        std::cout << message.id << std::endl;
     });
     
-    client.login("");
+    client.login("NjU5NTA0NTU1MDA4MTk2NjE5.XgPReg.hYvlx8s9wLCmBP5hJXHLOdrZGa8");
 
     return 1;
 }

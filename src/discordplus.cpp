@@ -3,6 +3,7 @@
 #include <cpprest/ws_client.h>
 #include <cpprest/json.h>
 #include <future>
+#include <array>
 #include "include/utility.hpp"
 #include "include/discordplus.hpp"
 #include "include/message.hpp"
@@ -74,17 +75,38 @@ namespace DiscordPlus
 
                             web::json::value data = DiscordPlus::Utility::from_string(message);
 
-                            int opCode = data["op"].as_integer();
+                            //int opCode = data["op"].as_integer();
 
                             if(data["t"].is_null())
                             {
                                 return;
                             } else if(data["t"].serialize() == "\"MESSAGE_CREATE\"")
                             {
+                                //Create message object
                                 Message discordMessage(StringT_To_String(data["d"]["content"].serialize()), StringT_To_String(data["d"]["id"].serialize()), StringT_To_String(data["d"]["timestamp"].serialize()), StringT_To_String(data["d"]["channel_id"].serialize()));
-                                std::cout << discordMessage.id << std::endl;
+                                //Emit event
                                 this->emit("message", &discordMessage);
-                            }
+                            } else if(data["t"].serialize() == "\"MESSAGE_DELETE\"")
+                            {
+                                std::cout << data << std::endl;
+                                //Create message object
+                                Message discordMessage("NULL", StringT_To_String(data["d"]["id"].serialize()), "NULL", StringT_To_String(data["d"]["channel_id"].serialize()));
+                                //Emit event
+                                this->emit("message_delete", &discordMessage);
+                            } else if (data["t"].serialize() == "\"MESSAGE_DELETE_BULK\"")
+                            {
+
+                                auto deleted_messages = data["d"]["ids"].as_array();
+                                //Create array of messages
+                                std::vector<Message> messages;
+                                //Put messages in the array
+                                for(int i = 0; i < deleted_messages.size(); i++)
+                                {
+                                    //messages.push_back();
+                                }
+                                //Emit event
+                                this->emit("bulk_delete", &data);
+                            }       
                         })
                         .wait();
                 }

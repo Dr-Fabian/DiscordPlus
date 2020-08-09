@@ -4,8 +4,10 @@
 class Channel
 {
 public:
-    std::string id;
-    std::string type;
+    std::string id{};
+    std::string type{};
+
+    Channel(std::string id, std::string type) : id(id), type(type) {};
 
     //functions
     void remove();
