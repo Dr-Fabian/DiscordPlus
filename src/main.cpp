@@ -3,6 +3,7 @@
 #include <string>
 #include <thread>
 #include <future>
+#include <vector>
 #include "include/discordplus.hpp"
 #include "include/utility.hpp"
 #include "include/message.hpp"
@@ -11,22 +12,28 @@ using namespace web::websockets::client;
 
 int main()
 {
-
     DiscordPlus::Client client;
 
-    client.on("message", [&](void* pointer){
-        std::cout << "message created // message handler" << std::endl;
-        DiscordPlus::Message message = *(DiscordPlus:: Message*) pointer;
+    client.on("message", [&](DiscordPlus::Message message){
         std::cout << message.content << std::endl;
     });
 
-    client.on("message_delete", [&](void* pointer){
-        std::cout << "message deleted // delete handler" <<  std::endl;
-        DiscordPlus::Message message = *(DiscordPlus:: Message*) pointer;
+    client.on("message_delete", [&](DiscordPlus::Message message){
         std::cout << message.id << std::endl;
     });
+
+    client.on("bulk_delete", [&](std::vector<std::string> messages){
+        for(int i = 0; i < messages.size(); i++)
+        {
+            std::cout << messages[i] << std::endl;
+        }
+    });
     
-    client.login("NjU5NTA0NTU1MDA4MTk2NjE5.XgPReg.hYvlx8s9wLCmBP5hJXHLOdrZGa8");
+    client.on("ready", [&](){
+        std::cout << "READY!" << std::endl;
+    });
+    
+    client.login("");
 
     return 1;
 }

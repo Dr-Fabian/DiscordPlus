@@ -4,7 +4,7 @@
 
 # Compiler settings - Can be customized.
 CC = g++
-CXXFLAGS = -std=c++11 -Wall
+CXXFLAGS = -std=c++17 -Wall
 LDFLAGS = -lboost_system -lcrypto -lssl -lcpprest -pthread
 
 # Makefile settings - Can be customized.

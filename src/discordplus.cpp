@@ -85,27 +85,31 @@ namespace DiscordPlus
                                 //Create message object
                                 Message discordMessage(StringT_To_String(data["d"]["content"].serialize()), StringT_To_String(data["d"]["id"].serialize()), StringT_To_String(data["d"]["timestamp"].serialize()), StringT_To_String(data["d"]["channel_id"].serialize()));
                                 //Emit event
-                                this->emit("message", &discordMessage);
+                                this->emit("message", discordMessage);
                             } else if(data["t"].serialize() == "\"MESSAGE_DELETE\"")
                             {
                                 std::cout << data << std::endl;
                                 //Create message object
                                 Message discordMessage("NULL", StringT_To_String(data["d"]["id"].serialize()), "NULL", StringT_To_String(data["d"]["channel_id"].serialize()));
                                 //Emit event
-                                this->emit("message_delete", &discordMessage);
+                                this->emit("message_delete", discordMessage);
                             } else if (data["t"].serialize() == "\"MESSAGE_DELETE_BULK\"")
                             {
 
                                 auto deleted_messages = data["d"]["ids"].as_array();
                                 //Create array of messages
-                                std::vector<Message> messages;
+                                std::vector<std::string> messages;
+
                                 //Put messages in the array
-                                for(int i = 0; i < deleted_messages.size(); i++)
+                                for(unsigned long i = 0; i < deleted_messages.size(); i++)
                                 {
-                                    //messages.push_back();
+                                    messages.push_back(deleted_messages[i].to_string());
                                 }
                                 //Emit event
-                                this->emit("bulk_delete", &data);
+                                this->emit("bulk_delete", messages);
+                            } else if (data["t"].serialize() == "\"READY\"")
+                            {
+                                this->emit("ready");
                             }       
                         })
                         .wait();
