@@ -2,17 +2,19 @@
 #include <string>
 #include <vector>
 #include "Channel.hpp"
+#include "GuildMember.hpp"
 
 namespace DiscordPlus
 {
     class Message;
+    class GuildMember;
     class Guild
     {
         public:
 
             // ? Data
 
-            DiscordPlus::Channel afkChannel;
+            DiscordPlus::Channel* afkChannel;
             std::string afkChannelID;
             int afkTimeout;
             int approximateMemberCount;
@@ -40,18 +42,18 @@ namespace DiscordPlus
             int mfaLevel;
             std::string name;
             std::string nameAcronym;
-            //Owner as Member
             std::string ownerID;
+            DiscordPlus::GuildMember* owner;
             bool partner;
             int premiumSubscriptionCount;
             int premiumTier;
-            DiscordPlus::Channel publicUpdatesChannel;
+            DiscordPlus::Channel* publicUpdatesChannel;
             std::string region;
             //Roles manager
-            DiscordPlus::Channel rulesChannel;
+            DiscordPlus::Channel* rulesChannel;
             std::string rulesChannelID;
             std::string splash;
-            DiscordPlus::Channel systemChannel;
+            DiscordPlus::Channel* systemChannel;
             std::string systemChannelID;
             std::string vanityURLCode;
             int vanityURLUses;
@@ -60,8 +62,14 @@ namespace DiscordPlus
             //Voice state
 
             // ! Constructors
-            
+
             Guild(){};
-            ~Guild(){};
+            ~Guild(){
+                delete systemChannel;
+                delete rulesChannel;
+                delete publicUpdatesChannel;
+                delete afkChannel;
+                delete owner;
+            };
     };
 };

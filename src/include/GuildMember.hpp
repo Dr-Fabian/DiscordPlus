@@ -1,10 +1,13 @@
+#pragma once
 #include <string>
 #include "Guild.hpp"
 #include "Message.hpp"
+#include "User.hpp"
 
 namespace DiscordPlus
 {
     class Guild;
+    class User;
 
     class GuildMember
     {
@@ -29,7 +32,7 @@ namespace DiscordPlus
             int premiumSinceTimestamp;
             //Presence presence
             //GuildRolesManager Roles
-            //User user
+            DiscordPlus::User* user;
             //VoiceState voice
 
             // ! Constructors / Destructors
@@ -37,6 +40,7 @@ namespace DiscordPlus
             ~GuildMember(){
                 delete guild;
                 delete lastMessage;
+                delete user;
             };
     };
 };

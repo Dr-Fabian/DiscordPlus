@@ -4,11 +4,14 @@
 #include "Channel.hpp"
 #include "Guild.hpp"
 #include "GuildMember.hpp"
+#include "User.hpp"
 
 namespace DiscordPlus
 {
     class Guild;
     class GuildMember;
+    class User;
+
     class Message
     {
     public:
