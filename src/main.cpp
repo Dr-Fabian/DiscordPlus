@@ -33,7 +33,7 @@ int main()
         std::cout << "READY!" << std::endl;
     });
     
-    client.login("");
+    client.login("NjU5NTA0NTU1MDA4MTk2NjE5.XgPReg.HvQ0kvYrtmqKac36lRYx3e6ayoY");
 
     return 1;
 }

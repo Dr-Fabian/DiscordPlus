@@ -1,14 +1,17 @@
 #pragma once
 #include <string>
 #include <vector>
-#include "Message.hpp"
 #include "Channel.hpp"
 
 namespace DiscordPlus
 {
+    class Message;
     class Guild
     {
         public:
+
+            // ? Data
+
             DiscordPlus::Channel afkChannel;
             std::string afkChannelID;
             int afkTimeout;
@@ -56,7 +59,9 @@ namespace DiscordPlus
             bool verified;
             //Voice state
 
-            Guild();
-            ~Guild();
+            // ! Constructors
+            
+            Guild(){};
+            ~Guild(){};
     };
 };
