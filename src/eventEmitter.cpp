@@ -1,11 +1,11 @@
-#include "include/eventEmitter.hpp"
-#include "include/message.hpp"
 #include <string>
 #include <vector>
 #include <boost/variant.hpp>
 #include <algorithm>
 #include <iostream>
 #include <boost/any.hpp>
+#include "include/eventEmitter.hpp"
+#include "include/Message.hpp"
 
 void EventEmitter::emit(std::string event, boost::variant<DiscordPlus::Message, std::vector<std::string>> data)
 {

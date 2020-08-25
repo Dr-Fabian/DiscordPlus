@@ -4,9 +4,9 @@
 #include <thread>
 #include <future>
 #include <vector>
-#include "include/discordplus.hpp"
+#include "include/Client.hpp"
 #include "include/utility.hpp"
-#include "include/message.hpp"
+#include "include/Message.hpp"
 
 using namespace web::websockets::client;
 
@@ -23,7 +23,7 @@ int main()
     });
 
     client.on("bulk_delete", [&](std::vector<std::string> messages){
-        for(int i = 0; i < messages.size(); i++)
+        for(unsigned long i = 0; i < messages.size(); i++)
         {
             std::cout << messages[i] << std::endl;
         }

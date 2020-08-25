@@ -1,3 +1,4 @@
+#pragma once
 #include <cpprest/ws_client.h>
 #include <cpprest/json.h>
 #include <string>

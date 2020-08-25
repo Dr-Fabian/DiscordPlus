@@ -1,12 +1,11 @@
+#pragma once
 #include <string>
 #include <functional>
 #include <array>
 #include <stdarg.h>
 #include <boost/variant.hpp>
 #include <stdlib.h>
-#include "message.hpp"
-
-
+#include "Message.hpp"
 
 class EventEmitter
 {

@@ -1,8 +1,8 @@
 #pragma once
 #include <string>
-#include "eventEmitter.hpp"
 #include <unordered_map>
-#include "message.hpp"
+#include "eventEmitter.hpp"
+#include "Message.hpp"
 
 namespace DiscordPlus
 {

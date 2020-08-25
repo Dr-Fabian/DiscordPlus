@@ -4,10 +4,10 @@
 #include <cpprest/json.h>
 #include <future>
 #include <array>
-#include "include/utility.hpp"
-#include "include/discordplus.hpp"
-#include "include/message.hpp"
 #include <cpprest/details/web_utilities.h>
+#include "include/utility.hpp"
+#include "include/Client.hpp"
+#include "include/Message.hpp"
 
 using namespace web::websockets::client;
 using namespace DiscordPlus::Utility;
@@ -103,7 +103,7 @@ namespace DiscordPlus
                                 //Put messages in the array
                                 for(unsigned long i = 0; i < deleted_messages.size(); i++)
                                 {
-                                    messages.push_back(deleted_messages[i].to_string());
+                                    messages.push_back(deleted_messages[i].serialize());
                                 }
                                 //Emit event
                                 this->emit("bulk_delete", messages);

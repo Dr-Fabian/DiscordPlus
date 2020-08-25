@@ -1,4 +1,4 @@
-#include "include/message.hpp"
+#include "include/Message.hpp"
 #include <string>
 
 namespace DiscordPlus

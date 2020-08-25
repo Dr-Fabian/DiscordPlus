@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "channel.hpp"
+#include "Channel.hpp"
 
 namespace DiscordPlus
 {
